@@ -6,7 +6,7 @@
 /*   By: flee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:15:14 by flee              #+#    #+#             */
-/*   Updated: 2021/09/27 15:54:45 by flee             ###   ########.fr       */
+/*   Updated: 2021/09/29 12:18:06 by flee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 	signal(SIGUSR1, ft_handler);
 	if (argc != 3)
 	{
-		printf("error ./a.out [pid] [message]");
+		write(2, "error ./a.out [pid] [message]", 29);
 		return (EXIT_FAILURE);
 	}
 	str = argv[2];

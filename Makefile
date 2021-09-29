@@ -6,42 +6,67 @@
 #    By: flee <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/10 14:27:13 by flee              #+#    #+#              #
-#    Updated: 2021/09/27 15:35:06 by flee             ###   ########.fr        #
+#    Updated: 2021/09/29 11:54:33 by flee             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minitalk
+NAME_SERVER =	server
 
-SRC =		client.c \
+NAME_CLIENT =	client
+
+NAME_SERVER_BONUS =	server_bonus
+
+NAME_CLIENT_BONUS =	client_bonus
+
+SRC_SERVER =	server.c \
 			ft_atoi.c \
 			ft_putnbr.c \
-			server.c \
 
-SRCBONUS =	client_bonus.c \
-			server_bonus.c \
+SRC_CLIENT =	 client.c \
+			ft_atoi.c \
+
+SRC_SERVER_BONUS =	server_bonus.c \
 			ft_atoi.c \
 			ft_putnbr.c \
 
-OBJS = $(SRC:.c=.o)
+SRC_CLIENT_BONUS =	client.c \
+				ft_atoi.c \
 
-OBJSBONUS = $(SRCBONUS:.c=.o)
+CC = gcc
 
-all:        $(NAME)
+CFLAGS = -Werror -Wextra -Wall
 
-$(NAME):    $(OBJS)
-	ar rc $(NAME) $(OBJS)
+OBJS_SERVER = $(SRC_SERVER:.c=.o)
 
-bonus:    $(OBJSBONUS)
-	ar rc $(NAME) $(OBJSBONUS)
-.c.o:
-		gcc -Wall -Wextra -Werror -c $< -o $(<:.c=.o)
+OBJS_CLIENT = $(SRC_CLIENT:.c=.o)
+
+OBJS_SERVER_BONUS =	$(SRC_SERVER_BONUS:.c=.o)
+			
+OBJS_CLIENT_BONUS =	$(SRC_CLIENT_BONUS:.c=.o)
+
+all:        $(NAME_SERVER) $(NAME_CLIENT)
+
+$(NAME_SERVER):    $(OBJS_SERVER)
+	$(CC) $(CFLAGS) -o $(NAME_SERVER) $(OBJS_SERVER)
+
+$(NAME_CLIENT):    $(OBJS_CLIENT)
+	$(CC) $(CFLAGS) -o $(NAME_CLIENT) $(OBJS_CLIENT)
+
+
+bonus:    $(NAME_SERVER_BONUS) $(NAME_CLIENT_BONUS)
+
+$(NAME_SERVER_BONUS): $(OBJS_SERVER_BONUS)
+	 $(CC) $(CFLAGS) -o $(NAME_SERVER_BONUS) $(OBJS_SERVER_BONUS)
+
+$(NAME_CLIENT_BONUS): $(OBJS_CLIENT_BONUS)
+	$(CC) $(CFLAGS) -o $(NAME_CLIENT_BONUS) $(OBJS_CLIENT_BONUS)
+
 clean:
-		/bin/rm -f $(OBJS)    $(OBJSBONUS)
+		/bin/rm -f $(OBJS_SERVER) $(OBJS_CLIENT) $(OBJS_SERVER_BONUS) $(OBJS_CLIENT_BONUS)
 
 fclean:	clean
-	/bin/rm -f $(NAME)
+	/bin/rm -f $(NAME_SERVER) $(NAME_CLIENT) $(NAME_CLIENT_BONUS) $(NAME_SERVER_BONUS)
 
 re:	fclean all
 
 .PHONY: all clean fclean re
-

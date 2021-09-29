@@ -6,7 +6,7 @@
 /*   By: flee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:05:54 by flee              #+#    #+#             */
-/*   Updated: 2021/09/27 15:42:08 by flee             ###   ########.fr       */
+/*   Updated: 2021/09/29 12:12:54 by flee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,25 @@ int	main(void)
 	char				str[8];
 	int					nb;
 	struct sigaction	s_sa;
+	int					er;
 	pid_t				pid;
 
 	nb = 0;
+	er = 0;
 	pid = getpid();
 	s_sa.sa_sigaction = ft_handler;
 	sigemptyset(&s_sa.sa_mask);
 	s_sa.sa_flags = SA_SIGINFO;
-	sigaction(SIGUSR1, &s_sa, NULL );
-	sigaction(SIGUSR2, &s_sa, NULL );
+	er = sigaction(SIGUSR1, &s_sa, NULL );
+	er = sigaction(SIGUSR2, &s_sa, NULL );
 	write(1, "PID : ", 6);
 	ft_putnbr(pid);
 	write(1, "\n", 1);
 	while (1)
 	{
 		pause();
+		if (er == -1)
+			return (EXIT_FAILURE);
 		nb = ft_fill(str, nb);
 	}
 }

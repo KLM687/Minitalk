@@ -6,7 +6,7 @@
 /*   By: flee <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 15:05:20 by flee              #+#    #+#             */
-/*   Updated: 2021/09/27 15:40:22 by flee             ###   ########.fr       */
+/*   Updated: 2021/09/29 12:17:51 by flee             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	ft_handler(int sig)
 
 int	main(int argc, char **argv)
 {
-	char	*str;
-	pid_t	pid;
+	char			*str;
+	pid_t			pid;
 
 	signal(SIGUSR1, ft_handler);
 	if (argc != 3)
